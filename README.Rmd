@@ -130,6 +130,10 @@ Neighborhood
 Factor
 factor variable - levels indicate neighborhood area in Ames.
 
+## 2. is there a variable of special interest or focus?
+
+The variable of special interest in this dataset is *Total Living Area*, which reflects the total square footage of livable space in a home. This variable is important because it plays a major role in home-buying decisions and has a large impact on the Sale Price of a property
+
 
 3:
 ```{r}
