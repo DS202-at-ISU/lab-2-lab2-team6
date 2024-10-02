@@ -18,18 +18,124 @@ Include your answers in this document (Rmd file). Make sure that it knits proper
 All submissions to the github repo will be automatically uploaded for grading once the due date is passed.
 Submit a link to your repository on Canvas (only one submission per team) to signal to the instructors that you are done with your submission.
 
-```{include=TRUE}
+```{r}
 remotes::install_github("heike/classdata")
-library(classdata)
 install.packages("ggplot2")
 library(ggplot2)
 data()
-str(ames)
 
+
+library(classdata)
+head(ames, 50)
+str(ames)
+```
+Q1:
+
+Parcel ID 
+chr
+character with ID.
+
+Address
+chr
+property address in Ames, IA.
+
+Style
+Factor
+factor variable detailing the type of housing.
+
+Occupancy
+Factor
+factor variable of type of housing.
+
+Sale Date
+Date
+date of sale.
+
+Sale Price
+num
+sales price (in US dollar).
+```{include=FALSE}
+max(ames$"Sale Price",na.rm=TRUE)
+min(ames$"Sale Price",na.rm=TRUE)
+```
+range: 0 to 20500000
+
+Multi Sale
+chr
+logical value: was this sale part of a package?
+
+YearBuilt
+num
+integer value: year in which the house was built.
+```{include=FALSE}
+max(ames$"YearBuilt",na.rm=TRUE)
+min(ames$"YearBuilt",na.rm=TRUE)
+```
+range: 0 to 2022
+
+Acres
+num
+acres of the lot.
+```{include=FALSE}
+max(ames$Acres,na.rm=TRUE)
+min(ames$Acres,na.rm=TRUE)
+```
+range: 0 to 12.012
+
+TotalLivingArea (sf)
+num
+total living area in square feet.
+```{include=FALSE}
+max(ames$"TotalLivingArea (sf)",na.rm=TRUE)
+min(ames$"TotalLivingArea (sf)",na.rm=TRUE)
+```
+range: 0 to 6007
+
+Bedrooms
+num
+number of bedrooms.
+```{include=FALSE}
+max(ames$Bedrooms,na.rm=TRUE)
+min(ames$Bedrooms,na.rm=TRUE)
+```
+range: 0 to 10
+
+FinishedBsmtArea (sf)
+num
+total area of the finished basement in square feet.
+```{include=FALSE}
+max(ames$"FinishedBsmtArea (sf)",na.rm=TRUE)
+min(ames$"FinishedBsmtArea (sf)",na.rm=TRUE)
+```
+range: 10 to 6496
+
+LotArea(sf)
+num
+total lot area in square feet.
+```{include=FALSE}
+max(ames$"LotArea(sf)",na.rm=TRUE)
+min(ames$"LotArea(sf)",na.rm=TRUE)
+```
+range: 0 to 523228
+
+AC
+chr
+logical value: does the property have an AC?
+
+FirePlace
+chr
+logical value: does the property have an fireplace?
+
+Neighborhood
+Factor
+factor variable - levels indicate neighborhood area in Ames.
+
+
+3:
+```{r}
 ggplot(ames, aes(x=`Sale Price`)) + geom_histogram(binwidth = 500) + ggtitle("binwidth - 500")
 
 max(ames$`Sale Price`, na.rm=TRUE)
-The range of the variable Sale Price is 0-20,500,000. The highest value is a very far outlier, which most Sale Price values lying between 100,000 and 500,000. Additionally, there were quite a few listed as 0.
 
-data.frame(ames$`Sale Price`)
 ```
+The range of the variable Sale Price is 0-20,500,000. The highest value is a very far outlier, which most Sale Price values lying between 100,000 and 500,000. Additionally, there were quite a few listed as 0.
