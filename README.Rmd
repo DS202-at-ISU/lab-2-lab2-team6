@@ -145,11 +145,24 @@ max(ames$`Sale Price`, na.rm=TRUE)
 The range of the variable Sale Price is 0-20,500,000. The highest value is a very far outlier, which most Sale Price values lying between 100,000 and 500,000. Additionally, there were quite a few listed as 0.
 
 4:
-Matthew: TotalLivingArea (sf) range = 0 to 6007
+Matthew: TotalLivingArea (sf)
 ```{r setup, include=TRUE}
 library(ggplot2)
 ggplot(data = ames, 
        aes(x = ames$"TotalLivingArea (sf)", y = ames$"Sale Price")) +
   geom_point()
 ```
-
+Domain = 0 to 6007
+Range = 0 to 20500000
+It's hard to see what the trend is with outliers included, so I will make another graph without the outliers.
+```{r setup, include=TRUE}
+library(ggplot2)
+ggplot(data = ames, 
+       aes(x = ames$"TotalLivingArea (sf)", y = ames$"Sale Price")) +
+  geom_point() +
+  ylim(5000, 1200000) +
+  xlim(50, 4000)
+```
+Domain = 50 to 4000
+Range = 5000 to 1200000
+There is a trend that as the total living area increases, so does the price of the house. The domain and range was adjusted to exclude outliers listed in Q3. There are still some other outliers floating around, but the overall trend stands.
