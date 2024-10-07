@@ -29,7 +29,7 @@ library(classdata)
 head(ames, 50)
 str(ames)
 ```
-Q1:
+## 1:
 
 Parcel ID 
 chr
@@ -130,12 +130,12 @@ Neighborhood
 Factor
 factor variable - levels indicate neighborhood area in Ames.
 
-## 2. is there a variable of special interest or focus?
+## 2: is there a variable of special interest or focus?
 
 The variable of special interest in this dataset is *Total Living Area*, which reflects the total square footage of livable space in a home. This variable is important because it plays a major role in home-buying decisions and has a large impact on the Sale Price of a property
 
 
-3:
+## 3:
 ```{r}
 ggplot(ames, aes(x=`Sale Price`)) + geom_histogram(binwidth = 500) + ggtitle("binwidth - 500")
 
@@ -155,3 +155,12 @@ ggplot(ames, aes(x=YearBuilt, y=`Sale Price`, na.rm = TRUE)) + geom_point(aes(co
 
 ggplot(ames[which(ames$`Sale Price` < 2000) & ames$`Sale Price` > 0,], aes(x=YearBuilt, y=`Sale Price`, na.rm = TRUE)) + geom_point(aes(color=factor(YearBuilt)))
 ```
+
+### Matthew: TotalLivingArea (sf) range = 0 to 6007
+```{r setup, include=TRUE}
+library(ggplot2)
+ggplot(data = ames, 
+       aes(x = ames$"TotalLivingArea (sf)", y = ames$"Sale Price")) +
+  geom_point()
+```
+
