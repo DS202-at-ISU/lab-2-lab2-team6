@@ -34,7 +34,7 @@ install.packages("ggplot2")
     ## package 'ggplot2' successfully unpacked and MD5 sums checked
     ## 
     ## The downloaded binary packages are in
-    ##  C:\Users\Rae\AppData\Local\Temp\Rtmpu85rC7\downloaded_packages
+    ##  C:\Users\Rae\AppData\Local\Temp\RtmpU9nZHt\downloaded_packages
 
 ``` r
 library(ggplot2)
@@ -171,6 +171,13 @@ FirePlace chr logical value: does the property have an fireplace?
 Neighborhood Factor factor variable - levels indicate neighborhood area
 in Ames.
 
+## 2. is there a variable of special interest or focus?
+
+The variable of special interest in this dataset is *Total Living Area*,
+which reflects the total square footage of livable space in a home. This
+variable is important because it plays a major role in home-buying
+decisions and has a large impact on the Sale Price of a property
+
 3:
 
 ``` r
@@ -188,3 +195,36 @@ max(ames$`Sale Price`, na.rm=TRUE)
 The range of the variable Sale Price is 0-20,500,000. The highest value
 is a very far outlier, which most Sale Price values lying between
 100,000 and 500,000. Additionally, there were quite a few listed as 0.
+
+## 4:
+
+### Brianna
+
+The variable I have chosen is “Year Built” and plotted it against “Sale
+Price” in a scatter plot. The range of this variable is from 0-2022. As
+the year built increases, the Sale Price generally also increases,
+creating a positive correlation. The oddities of far outliers listed in
+\#3 were also noted here, with the houses having a sale price of 0 also
+having a 0 for Year Built. I removed these and created a second plot
+demonstrating this.
+
+``` r
+ggplot(ames, aes(x=YearBuilt, y=`Sale Price`, na.rm = TRUE)) + geom_point(aes(color=factor(YearBuilt)))
+```
+
+    ## Warning: Removed 447 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+ggplot(ames[which(ames$`Sale Price` < 2000) & ames$`Sale Price` > 0,], aes(x=YearBuilt, y=`Sale Price`, na.rm = TRUE)) + geom_point(aes(color=factor(YearBuilt)))
+```
+
+    ## Warning in which(ames$`Sale Price` < 2000) & ames$`Sale Price` > 0: longer
+    ## object length is not a multiple of shorter object length
+
+    ## Warning: Removed 365 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](README_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
