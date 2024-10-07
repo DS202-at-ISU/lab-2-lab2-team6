@@ -159,7 +159,7 @@ ggplot(data = ames,
 ### Analysis of Sale Price vs Year Built
 ```{r year_built_analysis}
 # Scatter plot of Sale Price against Year Built
-ggplot(na.omit(ames), aes(x = YearBuilt, y = `Sale Price`)) +
+ggplot(ames, aes(x = YearBuilt, y = `Sale Price`)) +
   geom_point() +
   ggtitle("Sale Price vs Year Built") +
   xlab("Year Built") +

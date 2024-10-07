@@ -34,7 +34,7 @@ install.packages("ggplot2")
 
     ## 
     ## The downloaded binary packages are in
-    ##  /var/folders/w2/lzx1xwjd1fb1r6fw31p2kxhc0000gn/T//RtmpNYMLAF/downloaded_packages
+    ##  /var/folders/w2/lzx1xwjd1fb1r6fw31p2kxhc0000gn/T//RtmpVTVtlV/downloaded_packages
 
 ``` r
 library(ggplot2)
@@ -222,12 +222,15 @@ ggplot(data = ames,
 
 ``` r
 # Scatter plot of Sale Price against Year Built
-ggplot(na.omit(ames), aes(x = YearBuilt, y = `Sale Price`)) +
+ggplot(ames, aes(x = YearBuilt, y = `Sale Price`)) +
   geom_point() +
   ggtitle("Sale Price vs Year Built") +
   xlab("Year Built") +
   ylab("Sale Price")
 ```
+
+    ## Warning: Removed 447 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
 
 ![](README_files/figure-gfm/year_built_analysis-1.png)<!-- -->
 
