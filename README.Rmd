@@ -19,12 +19,7 @@ All submissions to the github repo will be automatically uploaded for grading on
 Submit a link to your repository on Canvas (only one submission per team) to signal to the instructors that you are done with your submission.
 
 ```{r}
-remotes::install_github("heike/classdata")
-install.packages("ggplot2")
 library(ggplot2)
-data()
-
-
 library(classdata)
 head(ames, 50)
 str(ames)
@@ -54,7 +49,7 @@ date of sale.
 Sale Price
 num
 sales price (in US dollar).
-```{include=FALSE}
+```{r, include=FALSE}
 max(ames$"Sale Price",na.rm=TRUE)
 min(ames$"Sale Price",na.rm=TRUE)
 ```
@@ -67,7 +62,7 @@ logical value: was this sale part of a package?
 YearBuilt
 num
 integer value: year in which the house was built.
-```{include=FALSE}
+```{r, include=FALSE}
 max(ames$"YearBuilt",na.rm=TRUE)
 min(ames$"YearBuilt",na.rm=TRUE)
 ```
@@ -76,7 +71,7 @@ range: 0 to 2022
 Acres
 num
 acres of the lot.
-```{include=FALSE}
+```{r, include=FALSE}
 max(ames$Acres,na.rm=TRUE)
 min(ames$Acres,na.rm=TRUE)
 ```
@@ -85,7 +80,7 @@ range: 0 to 12.012
 TotalLivingArea (sf)
 num
 total living area in square feet.
-```{include=FALSE}
+```{r, include=FALSE}
 max(ames$"TotalLivingArea (sf)",na.rm=TRUE)
 min(ames$"TotalLivingArea (sf)",na.rm=TRUE)
 ```
@@ -94,7 +89,7 @@ range: 0 to 6007
 Bedrooms
 num
 number of bedrooms.
-```{include=FALSE}
+```{r, include=FALSE}
 max(ames$Bedrooms,na.rm=TRUE)
 min(ames$Bedrooms,na.rm=TRUE)
 ```
@@ -103,7 +98,7 @@ range: 0 to 10
 FinishedBsmtArea (sf)
 num
 total area of the finished basement in square feet.
-```{include=FALSE}
+```{r, include=FALSE}
 max(ames$"FinishedBsmtArea (sf)",na.rm=TRUE)
 min(ames$"FinishedBsmtArea (sf)",na.rm=TRUE)
 ```
@@ -112,7 +107,7 @@ range: 10 to 6496
 LotArea(sf)
 num
 total lot area in square feet.
-```{include=FALSE}
+```{r, include=FALSE}
 max(ames$"LotArea(sf)",na.rm=TRUE)
 min(ames$"LotArea(sf)",na.rm=TRUE)
 ```
@@ -146,7 +141,7 @@ The range of the variable Sale Price is 0-20,500,000. The highest value is a ver
 
 4:
 Matthew: TotalLivingArea (sf)
-```{r setup, include=TRUE}
+```{r , include=TRUE}
 library(ggplot2)
 ggplot(data = ames, 
        aes(x = ames$"TotalLivingArea (sf)", y = ames$"Sale Price")) +
@@ -155,7 +150,7 @@ ggplot(data = ames,
 Domain = 0 to 6007
 Range = 0 to 20500000
 It's hard to see what the trend is with outliers included, so I will make another graph without the outliers.
-```{r setup, include=TRUE}
+```{r, include=TRUE}
 library(ggplot2)
 ggplot(data = ames, 
        aes(x = ames$"TotalLivingArea (sf)", y = ames$"Sale Price")) +
@@ -166,3 +161,37 @@ ggplot(data = ames,
 Domain = 50 to 4000
 Range = 5000 to 1200000
 There is a trend that as the total living area increases, so does the price of the house. The domain and range was adjusted to exclude outliers listed in Q3. There are still some other outliers floating around, but the overall trend stands.
+
+
+
+
+
+## 4:
+### Brianna
+The variable I have chosen is "Year Built" and plotted it against "Sale Price" in a scatter plot. The range of this variable is from 0-2022. As the year built increases, the Sale Price generally also increases, creating a positive correlation. The oddities of far outliers listed in #3 were also noted here, with the houses having a sale price of 0 also having a 0 for Year Built. I removed these and created a second plot demonstrating this.
+```{r}
+
+ggplot(ames, aes(x=YearBuilt, y=`Sale Price`, na.rm = TRUE)) + geom_point(aes(color=factor(YearBuilt)))
+
+
+
+ggplot(ames[which(ames$`Sale Price` < 2000) & ames$`Sale Price` > 0,], aes(x=YearBuilt, y=`Sale Price`, na.rm = TRUE)) + geom_point(aes(color=factor(YearBuilt)))
+```
+
+
+# Analysis by Umesh Sai Teja Poola
+### Analysis of Sale Price vs Year Built
+```{r year_built_analysis}
+# Scatter plot of Sale Price against Year Built
+ggplot(na.omit(ames), aes(x = YearBuilt, y = `Sale Price`)) +
+  geom_point() +
+  ggtitle("Sale Price vs Year Built") +
+  xlab("Year Built") +
+  ylab("Sale Price")
+
+
+# Summary of Year Built range
+summary(ames$YearBuilt)
+```
+
+From the scatter plot, it can be observed that homes built in more recent years tend to have higher sale prices. However, there are a few older homes with high sale prices, possibly due to renovations or historical significance. The summary of the YearBuilt variable shows a wide range of construction dates, with the oldest homes built in the early 1900s and the newest built in recent years.
