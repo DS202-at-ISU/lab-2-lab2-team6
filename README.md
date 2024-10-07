@@ -18,8 +18,12 @@ Canvas (only one submission per team) to signal to the instructors that
 you are done with your submission.
 
 ``` r
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
 remotes::install_github("heike/classdata")
 ```
+
+    ## Using GitHub PAT from the git credential store.
 
     ## Skipping install of 'classdata' from a github remote, the SHA1 (1faa8961) has not changed since last install.
     ##   Use `force = TRUE` to force installation
@@ -28,13 +32,9 @@ remotes::install_github("heike/classdata")
 install.packages("ggplot2")
 ```
 
-    ## Installing package into 'C:/Users/Rae/AppData/Local/R/win-library/4.4'
-    ## (as 'lib' is unspecified)
-
-    ## package 'ggplot2' successfully unpacked and MD5 sums checked
     ## 
     ## The downloaded binary packages are in
-    ##  C:\Users\Rae\AppData\Local\Temp\Rtmpu85rC7\downloaded_packages
+    ##  /var/folders/w2/lzx1xwjd1fb1r6fw31p2kxhc0000gn/T//RtmpNYMLAF/downloaded_packages
 
 ``` r
 library(ggplot2)
@@ -171,6 +171,13 @@ FirePlace chr logical value: does the property have an fireplace?
 Neighborhood Factor factor variable - levels indicate neighborhood area
 in Ames.
 
+## 2. is there a variable of special interest or focus?
+
+The variable of special interest in this dataset is *Total Living Area*,
+which reflects the total square footage of livable space in a home. This
+variable is important because it plays a major role in home-buying
+decisions and has a large impact on the Sale Price of a property
+
 3:
 
 ``` r
@@ -188,3 +195,53 @@ max(ames$`Sale Price`, na.rm=TRUE)
 The range of the variable Sale Price is 0-20,500,000. The highest value
 is a very far outlier, which most Sale Price values lying between
 100,000 and 500,000. Additionally, there were quite a few listed as 0.
+
+4: Matthew: TotalLivingArea (sf) range = 0 to 6007
+
+``` r
+library(ggplot2)
+ggplot(data = ames, 
+       aes(x = ames$"TotalLivingArea (sf)", y = ames$"Sale Price")) +
+  geom_point()
+```
+
+    ## Warning: Use of `ames$"TotalLivingArea (sf)"` is discouraged.
+    ## ℹ Use `TotalLivingArea (sf)` instead.
+
+    ## Warning: Use of `ames$"Sale Price"` is discouraged.
+    ## ℹ Use `Sale Price` instead.
+
+    ## Warning: Removed 447 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](README_files/figure-gfm/setup_1-1.png)<!-- -->
+
+# Analysis by Umesh Sai Teja Poola
+
+### Analysis of Sale Price vs Year Built
+
+``` r
+# Scatter plot of Sale Price against Year Built
+ggplot(na.omit(ames), aes(x = YearBuilt, y = `Sale Price`)) +
+  geom_point() +
+  ggtitle("Sale Price vs Year Built") +
+  xlab("Year Built") +
+  ylab("Sale Price")
+```
+
+![](README_files/figure-gfm/year_built_analysis-1.png)<!-- -->
+
+``` r
+# Summary of Year Built range
+summary(ames$YearBuilt)
+```
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+    ##       0    1956    1978    1976    2002    2022     447
+
+From the scatter plot, it can be observed that homes built in more
+recent years tend to have higher sale prices. However, there are a few
+older homes with high sale prices, possibly due to renovations or
+historical significance. The summary of the YearBuilt variable shows a
+wide range of construction dates, with the oldest homes built in the
+early 1900s and the newest built in recent years.
